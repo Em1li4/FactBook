@@ -15,7 +15,7 @@ public class FactBook {
     //number of countries (rows) in input file
     static final int COUNTRY_COUNT = 263;
     // number of attritbutues (columns) in the input file
-    static final int ATTRIBUTE_COUNT = 46;
+    static final int ATTRIBUTE_COUNT = 44;
     static final int TOTAL_ROWS = 265;
     // TODO 3
     //Comment: Define Arrays to Store Data
@@ -25,8 +25,8 @@ public class FactBook {
     static double[][] attributes = new double[COUNTRY_COUNT][ATTRIBUTE_COUNT];
 
     static int AREA_COLUMN_INDEX = 0;
-    static int UNEMPLOYMENT_COLUMN_INDEX = 45;
-    static int HIV_AIDS_DEATHS_COLUMN_INDEX = 14;
+    static int UNEMPLOYMENT_COLUMN_INDEX = 43;
+    static int HIV_AIDS_DEATHS_COLUMN_INDEX = 12;
     static final String AREA_COLUMN_NAME = "Area(sq km)";
     static final String UNEMPLOYMENT_COLUMN_NAME = "Unemployment rate(%)";
     static final String HIV_AIDS_DEATH_COLUMN_NAME = "HIV/AIDS - deaths";
@@ -38,45 +38,25 @@ public class FactBook {
     public static void loadData() throws FileNotFoundException {
         int row = 0;
         Scanner scnr = new Scanner(new File("C:\\Users\\em1li\\Downloads\\factbook.csv"));
-        while (scnr.hasNextLine() && row < TOTAL_ROWS) {
-            String line = scnr.nextLine();
-            if (row == 0){
-                String[] splittedLine = line.split(";");
-                for (int col = 0; col < splittedLine.length - 1; col++) {
-                    String currentData = splittedLine[col + 1];
-                    if (AREA_COLUMN_NAME.equals(currentData)){
-                        AREA_COLUMN_INDEX = col;
-                    } else if (UNEMPLOYMENT_COLUMN_NAME.equals(currentData)) {
-                        UNEMPLOYMENT_COLUMN_INDEX = col;
-                    } else if (HIV_AIDS_DEATH_COLUMN_NAME.equals(currentData)) {
-                        HIV_AIDS_DEATHS_COLUMN_INDEX = col;
-                    }
-                }
-                // Testing to check Index for accuracy
-                System.out.println(UNEMPLOYMENT_COLUMN_INDEX);
-                System.out.println(AREA_COLUMN_INDEX);
-                System.out.println(HIV_AIDS_DEATHS_COLUMN_INDEX);
-
-            }
-            if (row >=  TOTAL_ROWS - COUNTRY_COUNT) {
-                String[] splittedLine = line.split(";");
-                countries[row - 2] = splittedLine[0];
-                for (int col = 0; col < splittedLine.length - 1; col++) {
-                    String currentData = splittedLine[col + 1];
-                    if (currentData.isEmpty()){
-                        attributes[row - 2][col] = 0;
-                    } else {
-                        attributes[row - 2][col] = Double.parseDouble(currentData);
-                    }
+        String line = scnr.nextLine(); // ROW 0
+        line = scnr.nextLine(); // ROW 1
+        while (scnr.hasNextLine() && row < COUNTRY_COUNT) {
+            line = scnr.nextLine();
+            String[] splittedLine = line.split(";", ATTRIBUTE_COUNT+1);
+            countries[row] = splittedLine[0];
+            for (int col = 0; col < ATTRIBUTE_COUNT ; col++) {
+                String currentData = splittedLine[col+1];
+                try {
+                    attributes[row][col] = Double.parseDouble(currentData);
+                } catch(Exception error) {
+                    attributes[row][col] = 0;
                 }
             }
-
             row++;
-
         }
 
         scnr.close();
-        }
+    }
 
 
 
@@ -146,8 +126,8 @@ public class FactBook {
             double area = attributes[i][AREA_COLUMN_INDEX];
 
             if (area < SmallestArea) {
-            SmallestArea = area;
-            CountryWithSmallestArea = countries[i];
+                SmallestArea = area;
+                CountryWithSmallestArea = countries[i];
             }
         }
         return CountryWithSmallestArea;
