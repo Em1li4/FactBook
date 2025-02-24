@@ -14,7 +14,7 @@ public class FactBook {
     //Comment: Define Arrays to Store Data
     //number of countries (rows) in input file
     static final int COUNTRY_COUNT = 263;
-    // number of attritbutues (columns) in the input file
+    // number of attributes (columns) in the input file
     static final int ATTRIBUTE_COUNT = 44;
     static final int TOTAL_ROWS = 265;
     // TODO 3
