@@ -5,7 +5,6 @@
 //
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class FactBook {
@@ -27,9 +26,6 @@ public class FactBook {
     static int AREA_COLUMN_INDEX = 0;
     static int UNEMPLOYMENT_COLUMN_INDEX = 43;
     static int HIV_AIDS_DEATHS_COLUMN_INDEX = 12;
-    static final String AREA_COLUMN_NAME = "Area(sq km)";
-    static final String UNEMPLOYMENT_COLUMN_NAME = "Unemployment rate(%)";
-    static final String HIV_AIDS_DEATH_COLUMN_NAME = "HIV/AIDS - deaths";
     // TODO 4
 
     //Load data into the arrays: countries, attributes
@@ -38,10 +34,10 @@ public class FactBook {
     public static void loadData() throws FileNotFoundException {
         int row = 0;
         Scanner scnr = new Scanner(new File("C:\\Users\\em1li\\Downloads\\factbook.csv"));
-        String line = scnr.nextLine(); // ROW 0
-        line = scnr.nextLine(); // ROW 1
+        scnr.nextLine(); // ROW 0
+        scnr.nextLine(); // ROW 1
         while (scnr.hasNextLine() && row < COUNTRY_COUNT) {
-            line = scnr.nextLine();
+            String line = scnr.nextLine();
             String[] splittedLine = line.split(";", ATTRIBUTE_COUNT+1);
             countries[row] = splittedLine[0];
             for (int col = 0; col < ATTRIBUTE_COUNT ; col++) {
