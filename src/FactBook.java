@@ -178,6 +178,18 @@ public class FactBook {
 // TODO 10
 /*
 
-[paste output of running your code here]
+43
+0
+12
+The largest country is Russia
+5 countries have unemployment rate > 50%
+13 countries have unemployment rate > 40%
+23 countries have unemployment rate > 30%
+Total HIV/AIDS deaths were 2835808
+What's the country with most HIV deaths?
+The country with most deaths for HIV is South Africa
+What's the smallest country?
+Smallest country is Bassas da India
+
 
 */
